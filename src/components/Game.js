@@ -1,17 +1,77 @@
 import React, { useState } from "react";
 import { calculateWinner } from "../calculate_win";
+// import { result } from "../result";
+// import { jumpToStart } from "../jump_to_start";
+// import { handleClick} from "../handle_click";
 import Board from "./Board";
+import Square from './Square';
 
 const Game = () => {
-  // TODO: Set up states and functions: position of Xs and Os on board,
-  // step number, whether X is next, is there a win or tie, etc.
+
+  const [board, setBoard] = useState([null, null, null, null, null, null, null, null, null]);
+
+  const [stepNumber, setStepNumber] = useState(0);  // int that is the 'step' number
+
+  const [xIsNext, setXisNext] = useState(true);  // boolean
+
+  const winner = calculateWinner(board); // a string that is the value of a square object
+
+
+  const handleClick = (index) => {
+    //console.log("Square " + index + " is clicked!");
+    let newBoard = board.slice();
+
+    if (winner != null || stepNumber >= 9) {
+      return;
+    }
+    const letter = xIsNext ? "X" : "O";
+    newBoard[index] = letter;
+
+    setBoard(newBoard);
+    setXisNext(!xIsNext);
+    let count = stepNumber;
+    count++;
+    console.log(count);
+    setStepNumber(count);
+  };
+
+  const jumpToStart = () => {
+       setBoard([null, null, null, null, null, null, null, null, null]);
+       setStepNumber(0);
+  };
+
+  const result = () => {
+    // return the resulting state of the game after a click happens
+      if (winner != null) {
+        return "Winner: " + winner;
+      } else if (stepNumber === 9) {
+        return "Tie Game";
+      } else {
+        return (xIsNext) ? "Next player: X" : "Next player: O";
+      }
+  };
+
 
   return (
     <>
-      TODO: Render the board here along with the title, game status,
-      and 'Go to Start' button.
+    <h1>Tic Tac Toe</h1>
+    <Board squares={board} onClick={handleClick} />
+    <div className='info-wrapper'>
+        <div>
+          <button className="btn" onClick={jumpToStart}>Go to Start</button>
+          {handleClick}
+        </div>
+        <h3><p text-align="right">{result()}</p></h3>
+    </div>
+
     </>
-  );
+  )
 };
+
+
+
+
+
+
 
 export default Game;
