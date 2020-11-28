@@ -57,11 +57,11 @@ const Game = () => {
     <h1>Tic Tac Toe</h1>
     <Board squares={board} onClick={handleClick} />
     <div className='info-wrapper'>
+      <h3><p text-align="right">{result()}</p></h3>
         <div>
           <button className="btn" onClick={jumpToStart}>Go to Start</button>
           {handleClick}
         </div>
-        <h3><p text-align="right">{result()}</p></h3>
     </div>
 
     </>

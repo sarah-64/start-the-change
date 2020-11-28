@@ -19,6 +19,8 @@ body {
   font-family: "Roboto", sans-serif;
   display: flex;
   justify-content: center;
+  text-align: center;
+  padding: inherit;
 }
 
 .board {
@@ -49,7 +51,10 @@ body {
    background-color: var(--greenish);
    margin-left: 25rem;
    color: var(--limey);
-   padding: 0.5rem;
+   padding: 1rem;
+   margin: auto;
+   margin-top: 0.5rem;
+   margin-bottom: 0.25rem;
  }
 
 .info-wrapper button:hover {
